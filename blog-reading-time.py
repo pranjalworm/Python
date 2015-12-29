@@ -3,12 +3,12 @@
 # Last Modified	:
 # Version		: 1.0
 # Modifications	:
-# Description	: Parse a file/blog, count the number of words in it and copy the estimated reading time embeded in html into clipboard, assuming that average reading time is 200 wpm and where the average word length is taken as 5.1 letters
-# Known Bugs     :
+# Description	: Parse text data from file/clipboard memory, count the number of words in it and copy the estimated reading time embeded in html into clipboard, assuming that average reading time is 200 wpm and where the average word length is taken as 5.1 letters
+# Known Bugs    :
 
 
 #importing vendor modules
-import sys, pyperclip, re
+import sys, pyperclip
 
 
 def countCharacters(fileData):
