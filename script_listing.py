@@ -9,11 +9,11 @@
 
 # Description			: This will list all the files in the given directory, it will also go through all the subdirectories as well
 
-import os																		# Load the library module							
+import os																		# Load the library module
 
 logdir = os.getenv("logs")												# Set the variable logdir by getting the value from the OS environment variable logs
 logfile = 'script_list.log'													# Set the variable logfile
-path = os.getenv("scripts")												# Set the varable path by getting the value from the OS environment variable scripts - 1.2
+path = os.getenv("scripts")												# Set the variable path by getting the value from the OS environment variable scripts - 1.2
 
 #path = (raw_input("Enter dir: "))										# Ask the user for the directory to scan
 logfilename=os.path.join(logdir, logfile)								# Set the variable logfilename by joining logdir and logfile together
