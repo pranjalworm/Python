@@ -72,7 +72,7 @@ def estimatedReadingTime(words):
     print("\nWords : " + str(words) + "\nCode copied in Clipboard!\n")
 
 
-#if no command line arguments are passed, the script loads data from clipboard
+#if no command line argument is passed, the script loads data from clipboard
 if len(sys.argv) > 1:
     filename = sys.argv[1]
 
@@ -87,7 +87,7 @@ if len(sys.argv) > 1:
         countCharacters(fileData)
 
 else:
-    #loading number of words from data in clipboard
+    #loading data from clipboard
     fileData = pyperclip.paste()
 
     if fileData == '':
