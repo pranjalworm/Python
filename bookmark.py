@@ -18,25 +18,20 @@ for i in range(pdfReader.numPages):
     pageObject = pdfReader.getPage(i)
     pdfFileData += pageObject.extractText()
 
-pageStartingWords = input('Enter first few words: ')
-pageEndingWords = input('Enter last few words: ')
+actualBookPages = 568
+
+avgCharCountPerPage = len(pdfFileData) / actualBookPages
+
+print(avgCharCountPerPage)
 
 bookmarkPageWords = input('Enter few words of page to bookmark: ')
 
-matchCase1 = r'' + pageStartingWords + '(.*)' + pageEndingWords
+matchCase = r'' + bookmarkPageWords
 
-regex1 = re.compile(matchCase1, re.IGNORECASE | re.DOTALL)
+regex = re.compile(matchCase, re.IGNORECASE | re.DOTALL)
 
-charCountPerPage = re.search(regex1, pdfFileData).end() - re.search(regex1, pdfFileData).start()
+print(re.search(regex, pdfFileData).start())
 
-print("Character count per page :", charCountPerPage)
-
-matchCase2 = r'' + bookmarkPageWords
-
-regex2 = re.compile(matchCase2, re.IGNORECASE | re.DOTALL)
-
-print(re.search(regex2, pdfFileData).start())
-
-pageNumber = re.search(regex2, pdfFileData).start() / charCountPerPage
+pageNumber = re.search(regex, pdfFileData).start() / avgCharCountPerPage
 
 print(pageNumber)
