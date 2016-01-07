@@ -9,29 +9,37 @@
 
 import PyPDF2, re
 
-pdfFileObject = open("pdfs/the_girl_who_played_with_fire.pdf", "rb")
+filename = input('\nFilename : ')
+actualBookPages = input('\nTotal number of pages in your hard copy : ')
+bookmarkPageWords = input('\nFew words of page to bookmark : ')
+
+pdfFileObject = open(filename, "rb")
 pdfReader = PyPDF2.PdfFileReader(pdfFileObject)
 
 pdfFileData = ''
+
+print('\nReading file...')
 
 for i in range(pdfReader.numPages):
     pageObject = pdfReader.getPage(i)
     pdfFileData += pageObject.extractText()
 
-actualBookPages = 568
-
-avgCharCountPerPage = len(pdfFileData) / actualBookPages
-
-print(avgCharCountPerPage)
-
-bookmarkPageWords = input('Enter few words of page to bookmark: ')
+avgCharCountPerPage = len(pdfFileData) / int(actualBookPages)
 
 matchCase = r'' + bookmarkPageWords
 
 regex = re.compile(matchCase, re.IGNORECASE | re.DOTALL)
 
-print(re.search(regex, pdfFileData).start())
+matchResults = re.finditer(regex, pdfFileData)
+possiblePages = [match.start(0) for match in matchResults]
 
-pageNumber = re.search(regex, pdfFileData).start() / avgCharCountPerPage
+if len(possiblePages) == 1:
+    print('\nPossible hit in your hard copy:-\n')
+elif len(possiblePages) > 1:
+    print('\nPossible hits in your hard copy:-\n')
+else:
+    print('\nNo matches found!')
+    exit
 
-print(pageNumber)
+for page in possiblePages:
+    print(int(page / avgCharCountPerPage))
