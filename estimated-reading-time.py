@@ -22,15 +22,18 @@ def countCharacters(fileData):
     for i in range(len(fileData)):
         if fileData[i] in 'abcdefghijklmnopqrstuvwxyz':
             count += 1
-    estimatedReadingTime(count//5.1)
+    avgWordLength = 5.1
+    estimatedReadingTime(count//avgWordLength)
 
 def estimatedReadingTime(words):
     '''
     function to calculate estimated reading time from input words; then embed that value into predefined html code and load that into clipboard
     '''
-
+    
+    avgReadingSpeed = 200 #words per minute
+    
     #finding time
-    time = str(round((1/200) * words, 2)).split(".")
+    time = str(round((1/avgReadingSpeed) * words, 2)).split(".")
 
     #number of hours
     hours = int(time[0]) // 60
@@ -67,7 +70,6 @@ def estimatedReadingTime(words):
     copyBuffer = htmlPrefixCode + copyBuffer + htmlSuffixCode
 
     pyperclip.copy(copyBuffer)
-
 
     print("\nWords : " + str(words) + "\nCode copied in Clipboard!\n")
 
